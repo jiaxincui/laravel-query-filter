@@ -1,0 +1,15 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Jiaxincui\QueryFilter\BaseFilter;
+
+/**
+ * Class $CLASSNAME$.
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASSNAME$ extends BaseFilter
+{
+    // public function example($example) {}
+}

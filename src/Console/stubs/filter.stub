@@ -1,0 +1,23 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Jiaxincui\QueryFilter\Filter;
+
+/**
+ * Class $CLASSNAME$.
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASSNAME$ extends Filter
+{
+    protected function getFieldsQueryable()
+    {
+        return [];
+    }
+
+    protected function getReleasable()
+    {
+        return [];
+    }
+}
