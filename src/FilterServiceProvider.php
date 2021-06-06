@@ -21,6 +21,7 @@ class FilterServiceProvider extends ServiceProvider
                 FilterMakeCommand::class,
             ]);
         }
+        BaseFilter::resolveFilter(new QueryFilter($this->app->make('request')->query()));
     }
 
     /**
@@ -30,6 +31,5 @@ class FilterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        BaseFilter::resolveFilter(new QueryFilter($this->app->make('request')->query()));
     }
 }
