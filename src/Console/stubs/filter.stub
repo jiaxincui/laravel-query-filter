@@ -20,4 +20,9 @@ class $CLASSNAME$ extends Filter
     {
         return [];
     }
+
+    protected function getSortable()
+    {
+        return [];
+    }
 }

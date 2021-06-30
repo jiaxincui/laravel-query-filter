@@ -25,6 +25,13 @@ abstract class Filter extends BaseFilter
      */
     abstract protected function getReleasable();
 
+    /**
+     * getSortable
+     *
+     * @return array
+     */
+    abstract protected function getSortable();
+
     public function trashed($trashed)
     {
         if ($trashed === 'only') {
@@ -37,18 +44,22 @@ abstract class Filter extends BaseFilter
 
     public function orderBy($orderBy)
     {
-        $arr = explode(',', $orderBy);
-        $by = $arr[0];
-        $sort = $arr[1] ?? 'asc';
-        $this->builder->orderBy($by, $sort);
+        if ($orderBy) {
+            $arr = explode(',', $orderBy);
+            if (in_array($by = $arr[0], $this->getSortable())) {
+                $this->builder->orderBy($by, $arr[1] ?? 'asc');
+            }
+        }
     }
 
     public function slice($slice)
     {
-        $arr = explode(',', $slice);
-        $offset = (int)($arr[0] ?? 0);
-        $limit = (int)($arr[1] ?? 0);
-        $this->builder->offset($offset < 0 ? 0 : $offset)->limit($limit < 0 ? 0 : $limit);
+        if (count($arr = explode(',', $slice)) >=2 ) {
+            $offset = (int)($arr[0] ?? 0);
+            $limit = (int)($arr[1] ?? 0);
+            $this->builder->offset($offset < 0 ? 0 : $offset)->limit($limit < 0 ? 0 : $limit);
+        }
+
     }
 
     public function with($with)
@@ -59,7 +70,9 @@ abstract class Filter extends BaseFilter
             return in_array($v, $this->releasable);
         });
 
-        $this->builder->with($with);
+        if (count($with) > 0) {
+            $this->builder->with($with);
+        }
     }
 
     public function where($where)
