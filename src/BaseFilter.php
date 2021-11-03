@@ -15,12 +15,14 @@ abstract class BaseFilter
     {
         $this->builder = $builder;
 
-        $query = static::$filter->getQuery();
+        $filter = static::$filter;
+
+        $query = $filter->getQuery();
 
         foreach ($query as $name => $value) {
-            if ($value && method_exists($this, $name) && !isset((static::$filter)[$name])) {
+            if ($value && method_exists($this, $name) && !isset($filter[$name])) {
                 call_user_func_array([$this, $name], array_filter([$value]));
-                (static::$filter)[$name] = $value;
+                $filter[$name] = $value;
             }
         }
 

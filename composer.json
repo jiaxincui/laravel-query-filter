@@ -1,6 +1,6 @@
 {
     "name": "jiaxincui/laravel-query-filter",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "eloquent filter for laravel",
     "type": "library",
     "require": {

@@ -59,7 +59,6 @@ abstract class Filter extends BaseFilter
             $limit = (int)($arr[1] ?? 0);
             $this->builder->offset($offset < 0 ? 0 : $offset)->limit($limit < 0 ? 0 : $limit);
         }
-
     }
 
     public function with($with)
