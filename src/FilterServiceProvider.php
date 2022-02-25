@@ -5,7 +5,6 @@ namespace Jiaxincui\QueryFilter;
 use Illuminate\Support\ServiceProvider;
 use Jiaxincui\QueryFilter\Console\FilterMakeCommand;
 use Jiaxincui\QueryFilter\BaseFilter;
-use Jiaxincui\QueryFilter\QueryFilter;
 
 class FilterServiceProvider extends ServiceProvider
 {
@@ -21,7 +20,7 @@ class FilterServiceProvider extends ServiceProvider
                 FilterMakeCommand::class,
             ]);
         }
-        BaseFilter::resolveFilter(new QueryFilter($this->app->make('request')->query()));
+        BaseFilter::setQuery($this->app->make('request')->query());
     }
 
     /**

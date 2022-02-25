@@ -3,12 +3,12 @@
 namespace Jiaxincui\QueryFilter;
 
 use Jiaxincui\QueryFilter\BaseFilter;
+use Illuminate\Pipeline\Pipeline;
 
 trait FilterScope
 {
-
-    public function scopeFilter($query, BaseFilter $filters)
+    public function scopeFilter($builder, BaseFilter ...$filters)
     {
-        return $filters->apply($query);
+        return (new Pipeline)->via('apply')->send($builder)->through($filters)->thenReturn();
     }
 }

@@ -2,35 +2,33 @@
 
 namespace Jiaxincui\QueryFilter;
 
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
 abstract class BaseFilter
 {
 
-    private static $filter;
+    private static $requestQuery;
 
     protected $builder;
 
-    public function apply(Builder $builder)
+    public function apply(Builder $builder, Closure $next)
     {
         $this->builder = $builder;
 
-        $filter = static::$filter;
-
-        $query = $filter->getQuery();
+        $query = static::$requestQuery;
 
         foreach ($query as $name => $value) {
-            if ($value && method_exists($this, $name) && !isset($filter[$name])) {
+            if ($value && method_exists($this, $name)) {
                 call_user_func_array([$this, $name], array_filter([$value]));
-                $filter[$name] = $value;
             }
         }
 
-        return $this->builder;
+        return $next($this->builder);
     }
 
-    public static function resolveFilter($filter)
+    public static function setQuery(array $requestQuery)
     {
-        static::$filter = $filter;
+        static::$requestQuery = $requestQuery;
     }
 }
