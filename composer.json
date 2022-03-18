@@ -1,33 +1,33 @@
 {
-    "name": "jiaxincui/laravel-query-filter",
-    "version": "0.3.0",
-    "description": "eloquent filter for laravel",
-    "type": "library",
-    "require": {
-        "php": ">=7.0",
-        "illuminate/console": "~9.0",
-        "illuminate/database": "~9.0",
-        "illuminate/filesystem": "~9.0",
-        "illuminate/support": "~9.0",
-        "illuminate/pipeline": "~9.0"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "jiaxincui",
-            "email": "jenkincei@hotmail.com"
-        }
-    ],
-     "autoload": {
-        "psr-4": {
-            "Jiaxincui\\QueryFilter\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Jiaxincui\\QueryFilter\\FilterServiceProvider"
-            ]
-        }
+  "name": "jiaxincui/laravel-query-filter",
+  "version": "0.3.1",
+  "description": "eloquent filter for laravel",
+  "type": "library",
+  "require": {
+    "php": ">=7.0",
+    "illuminate/console": "~9.0",
+    "illuminate/database": "~9.0",
+    "illuminate/filesystem": "~9.0",
+    "illuminate/support": "~9.0",
+    "illuminate/pipeline": "~9.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jiaxincui",
+      "email": "jenkincei@hotmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Jiaxincui\\QueryFilter\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Jiaxincui\\QueryFilter\\FilterServiceProvider"
+      ]
+    }
+  }
 }

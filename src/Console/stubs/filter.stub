@@ -2,14 +2,14 @@
 
 namespace $NAMESPACE$;
 
-use Jiaxincui\QueryFilter\Filter;
+use Jiaxincui\QueryFilter\BaseFilter;
 
 /**
  * Class $CLASSNAME$.
  *
  * @package $NAMESPACE$
  */
-class $CLASSNAME$ extends Filter
+class $CLASSNAME$ extends BaseFilter
 {
     protected function getFieldsQueryable()
     {

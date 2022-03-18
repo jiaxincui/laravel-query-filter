@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Jiaxincui\QueryFilter\Console;
 
 class BaseFilterGenerator extends Generator
 {
-
     public function __construct(string $name, array $options = [])
     {
         $name = $this->qualifyName($name);

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jiaxincui\QueryFilter\Console;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

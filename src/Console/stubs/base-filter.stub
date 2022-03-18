@@ -2,14 +2,14 @@
 
 namespace $NAMESPACE$;
 
-use Jiaxincui\QueryFilter\BaseFilter;
+use Jiaxincui\QueryFilter\Filter;
 
 /**
  * Class $CLASSNAME$.
  *
  * @package $NAMESPACE$
  */
-class $CLASSNAME$ extends BaseFilter
+class $CLASSNAME$ implements Filter
 {
-    // public function example($example) {}
+    // public function apply($builder) {}
 }

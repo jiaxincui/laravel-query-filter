@@ -2,13 +2,12 @@
 
 namespace Jiaxincui\QueryFilter;
 
-use Jiaxincui\QueryFilter\BaseFilter;
-use Illuminate\Pipeline\Pipeline;
+use Jiaxincui\QueryFilter\Filter;
 
 trait FilterScope
 {
-    public function scopeFilter($builder, BaseFilter ...$filters)
+    public function scopeFilter($builder, Filter $filter)
     {
-        return (new Pipeline)->via('apply')->send($builder)->through($filters)->thenReturn();
+        return $filter->apply($builder);
     }
 }
