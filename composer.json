@@ -1,10 +1,10 @@
 {
   "name": "jiaxincui/laravel-query-filter",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "eloquent filter for laravel",
   "type": "library",
   "require": {
-    "php": ">=7.0",
+    "php": ">=8.0.2",
     "illuminate/console": "~9.0",
     "illuminate/database": "~9.0",
     "illuminate/filesystem": "~9.0",
