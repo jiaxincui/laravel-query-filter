@@ -7,7 +7,7 @@ use Jiaxincui\QueryFilter\Filter;
 
 abstract class BaseFilter implements Filter
 {
-    private static $requestQuery;
+    private static array $requestQuery;
 
     protected array $dontCallMethods = [
         'applyWhere',
@@ -21,7 +21,7 @@ abstract class BaseFilter implements Filter
 
     protected Builder $builder;
 
-    protected bool $trashedable = false;
+    protected bool $trashed = false;
 
     /**
      * @var array
@@ -55,7 +55,7 @@ abstract class BaseFilter implements Filter
     abstract protected function getSortable();
 
 
-    public function apply(Builder $builder)
+    public function apply(Builder $builder): Builder
     {
         $this->builder = $builder;
 
@@ -77,7 +77,7 @@ abstract class BaseFilter implements Filter
 
     public function trashed($trashed)
     {
-        if ($this->trashedable) {
+        if ($this->trashed) {
             if ($trashed === 'only') {
                 $this->builder->onlyTrashed();
             }
