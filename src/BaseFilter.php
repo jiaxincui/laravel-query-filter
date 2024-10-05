@@ -2,6 +2,7 @@
 
 namespace Jiaxincui\QueryFilter;
 
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Jiaxincui\QueryFilter\Filter;
 
@@ -9,6 +10,10 @@ abstract class BaseFilter implements Filter
 {
     private static array $requestQuery;
 
+    /**
+     * 禁止 request 调用的方法名
+     * @var array|string[]
+     */
     protected array $dontCallMethods = [
         'applyWhere',
         'parseWhere',
@@ -36,25 +41,29 @@ abstract class BaseFilter implements Filter
     /**
      * getFieldsQueryable
      *
-     * @return array
+     * @return array|string[]
      */
-    abstract protected function getFieldsQueryable();
+    abstract protected function getFieldsQueryable(): array;
 
     /**
      * getReleasable
      *
-     * @return array
+     * @return array|string[]
      */
-    abstract protected function getReleasable();
+    abstract protected function getReleasable(): array;
 
     /**
      * getSortable
      *
-     * @return array
+     * @return array|string[]
      */
-    abstract protected function getSortable();
+    abstract protected function getSortable(): array;
 
 
+    /**
+     * @param Builder $builder
+     * @return Builder
+     */
     public function apply(Builder $builder): Builder
     {
         $this->builder = $builder;
@@ -70,12 +79,20 @@ abstract class BaseFilter implements Filter
         return $this->builder;
     }
 
-    public static function setQuery(array $requestQuery)
+    /**
+     * @param array|string[] $requestQuery
+     * @return void
+     */
+    public static function setQuery(array $requestQuery): void
     {
         static::$requestQuery = $requestQuery;
     }
 
-    public function trashed($trashed)
+    /**
+     * @param string $trashed
+     * @return void
+     */
+    public function trashed(string $trashed): void
     {
         if ($this->trashed) {
             if ($trashed === 'only') {
@@ -87,7 +104,11 @@ abstract class BaseFilter implements Filter
         }
     }
 
-    public function orderBy($orderBy)
+    /**
+     * @param string $orderBy
+     * @return void
+     */
+    public function orderBy(string $orderBy): void
     {
         if ($orderBy) {
             $arr = explode(',', $orderBy);
@@ -97,16 +118,24 @@ abstract class BaseFilter implements Filter
         }
     }
 
-    public function slice($slice)
+    /**
+     * @param string $slice
+     * @return void
+     */
+    public function slice(string $slice): void
     {
         if (count($arr = explode(',', $slice)) >= 2) {
             $offset = (int)($arr[0] ?? 0);
             $limit = (int)($arr[1] ?? 0);
-            $this->builder->offset($offset < 0 ? 0 : $offset)->limit($limit < 0 ? 0 : $limit);
+            $this->builder->offset(max($offset, 0))->limit(max($limit, 0));
         }
     }
 
-    public function with($with)
+    /**
+     * @param string $with
+     * @return void
+     */
+    public function with(string $with): void
     {
         $this->releasable = $this->getReleasable();
         $with = explode(',', $with);
@@ -119,7 +148,11 @@ abstract class BaseFilter implements Filter
         }
     }
 
-    public function where($where)
+    /**
+     * @param string|array|string[] $where
+     * @return void
+     */
+    public function where(string|array $where): void
     {
         $this->queryable = $this->getFieldsQueryable();
         if (is_array($where)) {
@@ -132,7 +165,11 @@ abstract class BaseFilter implements Filter
         }
     }
 
-    protected function applyWhere($where)
+    /**
+     * @param string $where
+     * @return void
+     */
+    protected function applyWhere(string $where): void
     {
         $this->builder->where(function ($query) use ($where) {
             $parseWhere = $this->parseWhere($where);
@@ -168,7 +205,11 @@ abstract class BaseFilter implements Filter
         });
     }
 
-    protected function parseWhere($data)
+    /**
+     * @param string $data
+     * @return array
+     */
+    protected function parseWhere(string $data): array
     {
         $result = [];
         foreach (explode(';', $data) as $v) {
@@ -185,7 +226,13 @@ abstract class BaseFilter implements Filter
         return $result;
     }
 
-    protected function whereQuery($field, $separator, $value)
+    /**
+     * @param string $field
+     * @param string $separator
+     * @param string $value
+     * @return Closure
+     */
+    protected function whereQuery(string $field, string $separator, string $value): Closure
     {
         return function ($query) use ($field, $separator, $value) {
             switch (strtolower($separator)) {
@@ -216,7 +263,13 @@ abstract class BaseFilter implements Filter
         };
     }
 
-    protected function orWhereQuery($field, $separator, $value)
+    /**
+     * @param string $field
+     * @param string $separator
+     * @param string $value
+     * @return Closure
+     */
+    protected function orWhereQuery(string $field, string $separator, string $value): Closure
     {
         return function ($query) use ($field, $separator, $value) {
             switch (strtolower($separator)) {
