@@ -4,7 +4,6 @@ namespace Jiaxincui\QueryFilter;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use Jiaxincui\QueryFilter\Filter;
 
 abstract class BaseFilter implements Filter
 {
@@ -59,6 +58,14 @@ abstract class BaseFilter implements Filter
      */
     abstract protected function getSortable(): array;
 
+    /**
+     * @param Builder $builder
+     * @return Builder
+     */
+    protected function addBaseScope(Builder $builder): Builder
+    {
+        return $builder;
+    }
 
     /**
      * @param Builder $builder
@@ -66,7 +73,7 @@ abstract class BaseFilter implements Filter
      */
     public function apply(Builder $builder): Builder
     {
-        $this->builder = $builder;
+        $this->builder = $this->addBaseScope($builder);
 
         $query = static::$requestQuery;
 

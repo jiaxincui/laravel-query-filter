@@ -2,6 +2,7 @@
 
 namespace $NAMESPACE$;
 
+//use Illuminate\Database\Eloquent\Builder;
 use Jiaxincui\QueryFilter\BaseFilter;
 
 /**
@@ -11,18 +12,24 @@ use Jiaxincui\QueryFilter\BaseFilter;
  */
 class $CLASSNAME$ extends BaseFilter
 {
-    protected function getFieldsQueryable()
+    protected function getFieldsQueryable(): array
     {
         return [];
     }
 
-    protected function getReleasable()
+    protected function getReleasable(): array
     {
         return [];
     }
 
-    protected function getSortable()
+    protected function getSortable(): array
     {
         return [];
     }
+
+//    protected function addBaseScope(Builder $builder): Builder
+//    {
+//        return $builder;
+//    }
+
 }
