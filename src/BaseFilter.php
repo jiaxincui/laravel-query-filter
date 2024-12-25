@@ -236,10 +236,10 @@ abstract class BaseFilter implements Filter
     /**
      * @param string $field
      * @param string $separator
-     * @param string $value
+     * @param string|null $value
      * @return Closure
      */
-    protected function whereQuery(string $field, string $separator, string $value): Closure
+    protected function whereQuery(string $field, string $separator, ?string $value): Closure
     {
         return function ($query) use ($field, $separator, $value) {
             switch (strtolower($separator)) {
