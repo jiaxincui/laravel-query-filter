@@ -1,15 +1,15 @@
 {
   "name": "jiaxincui/laravel-query-filter",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "eloquent filter for laravel",
   "type": "library",
   "require": {
     "php": ">=8.1",
-    "illuminate/console": "^9.0|^10.0|^11.0",
-    "illuminate/database": "^9.0|^10.0|^11.0",
-    "illuminate/filesystem": "^9.0|^10.0|^11.0",
-    "illuminate/support": "^9.0|^10.0|^11.0",
-    "illuminate/pipeline": "^9.0|^10.0|^11.0"
+    "illuminate/console": "^9.0|^10.0|^11.0|^12.0|",
+    "illuminate/database": "^9.0|^10.0|^11.0^12.0|",
+    "illuminate/filesystem": "^9.0|^10.0|^11.0^12.0|",
+    "illuminate/support": "^9.0|^10.0|^11.0^12.0|",
+    "illuminate/pipeline": "^9.0|^10.0|^11.0^12.0|"
   },
   "license": "MIT",
   "authors": [
